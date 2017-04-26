@@ -1,20 +1,10 @@
-packages <- c("devtools", "d3heatmap", "pairsD3", "shiny")
-
-for (i in 1:length(packages)) {
-  if(! is.element(packages[i],installed.packages()[,1])) {
-    install.packages(packages[i])
-  }
-}
-
 library(devtools)
-
-if(! is.element("parcoords",installed.packages()[,1])) {
-  devtools::install_github("timelyportfolio/parcoords")
-}
-
-library(shiny)
+# devtools::install_github("timelyportfolio/parcoords")
 library(parcoords)
+
+
 library(pairsD3)
+library(shiny)
 library(d3heatmap)
 
 
@@ -84,15 +74,15 @@ ui<-fluidPage(
              h1("Diabetes Dataset Heatmap"),
                       selectInput("palette", "Palette", c("YlOrRd", "RdYlBu", "Greens", "Blues")),
                       checkboxGroupInput("groups","Select Groups",
-                                         # choiceNames =
-                                         #   list("Race", "Gender", "Age"),
-                                         choices=
+                                         choiceNames =
+                                           list("Race", "Gender", "Age"),
+                                         choiceValues =
                                            list("race", "gender", "age"),
                                          inline = T, selected = c("race", "gender")),
                       checkboxInput("cluster", "Apply clustering and get dendogram"),
                       checkboxGroupInput("columns","Select Columns",
-                                         # choiceNames = labs_heatmap,
-                                         choices = original_heatmap,
+                                         choiceNames = labs_heatmap,
+                                         choiceValues = original_heatmap,
                                          inline = T, selected = c("time_in_hospital", "num_lab_procedures", "num_procedures", "num_medications", "number_outpatient", "number_emergency", "number_inpatient", "number_diagnoses")),
                       d3heatmapOutput("heatmap", height = 600)),
     tabPanel("Scatterplot Matrix",
