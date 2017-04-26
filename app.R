@@ -6,6 +6,7 @@ for (i in 1:length(packages)) {
   }
 }
 
+library(devtools)
 devtools::install_github("timelyportfolio/parcoords")
 library(parcoords)
 
