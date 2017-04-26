@@ -1,7 +1,9 @@
-packages <- c("shiny", "devtools", "d3heatmap", "pairsD3")
+packages <- c("devtools", "d3heatmap", "pairsD3", "shiny")
 
 for (i in 1:length(packages)) {
-  if (!require(packages[i])) install.packages(packages[i])
+  if(! is.element(packages[i],installed.packages()[,1])) {
+    install.packages(packages[i])
+  }
 }
 
 devtools::install_github("timelyportfolio/parcoords")
